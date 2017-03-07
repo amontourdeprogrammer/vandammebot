@@ -1,21 +1,62 @@
 
+// This function tells me if a message is new or not
+// Input : message object
+// Output : true if new, False if not new
 
-//curl -X GET "http://127.0.0.1:3000/admin/users/list/active.json?api_key=d4fb34eff83af60a16791e0807c39c2dfbfcc8a81005536dd9c432fe6ca8f6de&api_username=Anna-Livia"";
+function isItNew(post) {
+	console.log("Start isNew");
+	console.log(post.read);
+	//if unread
+	if (post.read == false) {
+			//keep in the list
+			return true;
+		} else { 
+			//discard
+    			console.log('NOOOOOOOOOPE !!!!!!!');
+    		return false;
+		};
+	}
 
-//curl -X GET "http://communaute.amontourdeprogrammer.fr?api_key=d4fb34eff83af60a16791e0807c39c2dfbfcc8a81005536dd9c432fe6ca8f6de&api_username=yannick";
 
-/**Curl works in console with 
-"http://communaute.amontourdeprogrammer.fr?api_key=d4fb34eff83af60a16791e0807c39c2dfbfcc8a81005536dd9c432fe6ca8f6de&api_username=yannick"
-It seems it could be any user that has access o 
-**/
+// This function extracts the posts from the json of a disourse topic
+// Input : URL of discourse topic + api_key + api_username
+// Output : list of post on the topic (as js objects)
 
-var request = require('request');
+//var urltopic = 'http://communaute.amontourdeprogrammer.fr/t/comptes-github-et-twitter-de-chacunes/40.json?api_key=d4fb34eff83af60a16791e0807c39c2dfbfcc8a81005536dd9c432fe6ca8f6de&api_username=Anna-Livia'
+var urltopic = 'http://communaute.amontourdeprogrammer.fr/t/cle-publique-et-chiffrement-rsa/50.json?api_key=d4fb34eff83af60a16791e0807c39c2dfbfcc8a81005536dd9c432fe6ca8f6de&api_username=LoreenRH'
 
-var a = request('http://communaute.amontourdeprogrammer.fr/t/titres-et-certifications-que-les-apprenantes-peuvent-passer/16.json?api_key=d4fb34eff83af60a16791e0807c39c2dfbfcc8a81005536dd9c432fe6ca8f6de&api_username=yannick', function (error, response, body) {
-  console.log('error:', error); // Print the error if one occurred 
-  console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received 
-  console.log('body:', body); // Print the HTML for the Google homepage. 
-}) //ça marche!! 
+function getposts(url) {
+	const fs = require('fs');
+	const got = require('got');
+
+	var listOfPosts = [] ;
+	console.log('start getposts')
+	// Open a url
+	got(url)
+	    .then(response => {
+	    	// get the list of posts
+	    	console.log("before list of posts");
+	        listOfPosts = JSON.parse(response.body).post_stream.posts;
+	        console.log("after list of posts");
+	        // filter the list with the "is it new function
+	        var filteredPosts = listOfPosts.filter(isItNew);
+	        console.log("after filter");
+			console.log(filteredPosts);
+	        //=> '<!doctype html> ...' 
+	    })
+	    .catch(error => {
+	        console.log(error.response.body);
+	        //=> 'Internal server error ...' 
+	    });
+	console.log("end of getposts");
+	}
+
+getposts(urltopic);
+//http://docs.discourse.org/
+
+//var listOfPosts = ;
+
+
 
 
 //console.log("OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOH", a);

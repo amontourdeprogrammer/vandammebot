@@ -49,4 +49,18 @@ request('test.html', function (error, response, body) {
 var username = "Anna-Livia"
 
 
+function isItNew(post) {
+	console.log("Start isNew");
+	postList.forEach(function(post) {
+		if (post.read == 'true') {
+			console.log('HELOOOOOOOOOOOOOOOOOOO2 !!!!!!!');
+		} else { 
+    			console.log('NOOOOOOOOOPE !!!!!!!')
+		};
+
+
+	});
+}
+
+
 
