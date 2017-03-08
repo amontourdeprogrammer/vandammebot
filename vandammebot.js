@@ -22,8 +22,8 @@ function isItNew(post) {
 // Input : URL of discourse topic + api_key + api_username
 // Output : list of post on the topic (as js objects)
 
-//var urltopic = 'http://communaute.amontourdeprogrammer.fr/t/comptes-github-et-twitter-de-chacunes/40.json?api_key=d4fb34eff83af60a16791e0807c39c2dfbfcc8a81005536dd9c432fe6ca8f6de&api_username=Anna-Livia'
-var urltopic = 'http://communaute.amontourdeprogrammer.fr/t/cle-publique-et-chiffrement-rsa/50.json?api_key=d4fb34eff83af60a16791e0807c39c2dfbfcc8a81005536dd9c432fe6ca8f6de&api_username=LoreenRH'
+var urltopic = 'http://communaute.amontourdeprogrammer.fr/t/comptes-github-et-twitter-de-chacunes/40.json?api_key=d4fb34eff83af60a16791e0807c39c2dfbfcc8a81005536dd9c432fe6ca8f6de&api_username=Anna-Livia'
+//var urltopic = 'http://communaute.amontourdeprogrammer.fr/t/cle-publique-et-chiffrement-rsa/50.json?api_key=d4fb34eff83af60a16791e0807c39c2dfbfcc8a81005536dd9c432fe6ca8f6de&api_username=LoreenRH'
 
 function getposts(url) {
 	const fs = require('fs');
@@ -39,6 +39,7 @@ function getposts(url) {
 	        listOfPosts = JSON.parse(response.body).post_stream.posts;
 	        console.log("after list of posts");
 	        // filter the list with the "is it new function
+	        console.log("list of", listOfPosts.length, typeof(listOfPosts));
 	        var filteredPosts = listOfPosts.filter(isItNew);
 	        console.log("after filter");
 			console.log(filteredPosts);
