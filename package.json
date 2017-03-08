@@ -1,0 +1,21 @@
+{
+  "name": "vandammebot",
+  "version": "1.0.0",
+  "description": "Bot sends JCVD quotes to discourse post that use english sounding words",
+  "main": "vandammebot.js",
+  "dependencies": {},
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/amontourdeprogrammer/vandammebot.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/amontourdeprogrammer/vandammebot/issues"
+  },
+  "homepage": "https://github.com/amontourdeprogrammer/vandammebot#readme"
+}
